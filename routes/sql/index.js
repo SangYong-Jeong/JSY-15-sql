@@ -2,18 +2,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 const { error } = require('../../modules/util')
-
-const mysql = require('mysql2/promise')
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-	port: process.env.DB_PORT, // mysql2는 3306 port로 접근해서 생략가능
-  user: process.env.DB_USER, 
-	password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-	waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
+const {pool} = require('../../modules/mysql')
 
 router.get('/list', async (req, res, next) => {
 	let sql = 'SELECT * FROM books'  
@@ -21,12 +10,14 @@ router.get('/list', async (req, res, next) => {
 		res.status(200).json(r)
 })
 
+// let sql = `INSERT INTO books SET title='${title}', writer='${writer}', content='${content}'`
 router.get('/create', async (req, res, next) => {
 	let title = '홍길동전'
 	let writer = '허균'
 	let content = '아버지를 아버지라...'
-	let sql = `INSERT INTO books SET title='${title}', writer='${writer}', content='${content}'`
-	let r = await pool.query(sql)
+	let sql = 'INSERT INTO books SET title=?, writer=?, content=?'
+	let values = [title, writer, content]
+	let r = await pool.query(sql, values)
 	res.status(200).json(r)
 })
 

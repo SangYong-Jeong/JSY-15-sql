@@ -4,6 +4,9 @@ const path = require('path')
 const error = (code, msg) => {
 	let message = '서버 에러입니다. 관리자에게 문의하세요.'
 	switch(code){
+		case 400:
+			message = '요청이 잘못되었습니다.'
+			break;
 		case 404:
 			message = '경로를 찾을 수 없습니다.'
 			break;

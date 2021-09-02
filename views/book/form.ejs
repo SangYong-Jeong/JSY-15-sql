@@ -1,9 +1,7 @@
 <%- include('../inc/head') %> 
 <%- include('../inc/header') %>
 <div class="form-wrapper wrapper">
-	<h3 class="title-wrap">
-		<sapn class="bullet"></sapn> <%= title %> 
-	</h3>
+	<%- include('../inc/book/title-bar') %> 
 	<form action="/book/save" name="saveForm" onsubmit="return onSubmit(this);" method="POST">
 		<table>
 			<tbody>

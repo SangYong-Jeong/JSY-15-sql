@@ -44,6 +44,14 @@
 			}, 100)
 		}
 	
+		function getInfo(id, cb) {
+			setTimeout(function() {
+				var user = users.filter(function(v) {return v.id === id})
+				if(user.length === 0) cb('정보를 찾을 수 없습니다.')
+				else cb(null, user)
+			}, 100)
+		}
+
 		function send(f) {
 			var userid = f.userid.value
 			var userpw = f.userpw.value
@@ -77,13 +85,7 @@
 			return false
 			}
 
-		function getInfo(id, cb) {
-			setTimeout(function() {
-				var user = users.filter(function(v) {return v.id === id})
-				if(user.length === 0) cb('정보를 찾을 수 없습니다.')
-				else cb(null, user)
-			}, 100)
-		}
+		
 	
 		
 	</script>

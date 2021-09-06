@@ -1,8 +1,8 @@
-<%- include('../inc/head') %> 
+<%- include('../inc/head', {css}) %> 
 <%- include('../inc/header') %>
 <div class="form-wrapper wrapper">
-	<%- include('../inc/book/title-bar') %> 
-	<form action="/book/save" name="saveForm" onsubmit="return onSubmit(this);" method="POST">
+	<%- include('../inc/book/title-bar', {title, description}) %> 
+	<form action="/book/save" name="saveForm" method="POST">
 		<table>
 			<tbody>
 				<tr>
@@ -29,4 +29,4 @@
 		</div>
 	</form>
 </div>
-<%- include('../inc/foot') %> 
+<%- include('../inc/foot', {js}) %> 

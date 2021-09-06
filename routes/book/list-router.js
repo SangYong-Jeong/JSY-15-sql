@@ -9,7 +9,6 @@ router.get('/', async (req, res, next) => {
 	try {
 		const sql = 'SELECT * FROM books ORDER BY idx DESC';
 		const [rs] = await pool.execute(sql)
-
 		const books = rs.map( v => {
 			v.createdAt = moment(v.createdAt).format('YYYY-MM-DD')
 			v.content = cutTail(v.content)

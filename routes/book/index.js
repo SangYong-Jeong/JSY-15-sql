@@ -4,17 +4,19 @@ const router = express.Router()
 const { error } = require('../../modules/util')
 
 const formRouter = require('./form-router')
-const saveRouter = require('./save-router')
 const listRouter = require('./list-router')
 const viewRouter = require('./view-router')
+const createRouter = require('./create-router')
+const updateRouter = require('./update-router')
 const deleteRouter = require('./delete-router')
 
 // static 주소는 use로 받아서 전달해야한다. 가변은 get으로 받아도 상관없다.
-router.post('/', saveRouter) // POST: 저장
+router.post('/', createRouter) // POST: 저장
+router.put('/', updateRouter) // UPDATE: 수정
 router.delete('/', deleteRouter) // DELETE: 삭제
 router.use('/form', formRouter) // HTML: 글작성(수정)페이지
-router.use(['/', '/list', '/list/:page'], listRouter) // HTML/GET: 리스트페이지
 router.use('/view', viewRouter) // HTML/GET: 상세페이지
+router.use('/', listRouter) // HTML/GET: 리스트페이지
 
 module.exports = router
 

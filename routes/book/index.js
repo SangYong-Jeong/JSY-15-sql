@@ -22,10 +22,10 @@ module.exports = router
 
 /*  Restful 진영에서는 주소를 method로 구분하는 것을 권장하고 있다.
 
-GET    [/book, /book/list] - 페이지리스트 LIST - 1page
-GET    /book/list/:page - 페이지리스트 LIST - 해당페이지
+GET    [/book, /book/:page] - 페이지리스트 LIST - page
 GET    /book/view/1 - 상세리스트 VIEW
-GET    /book/update/1 - 상세리스트 update
+GET    /book/form - 신규 CREATE
+GET    /book/form/1 - 수정 UPDATE
 POST   /book - 저장 save
 PUT    /book - 업데이트 update
 DELETE /book - 삭제 delete

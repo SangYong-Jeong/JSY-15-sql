@@ -11,16 +11,19 @@ const deleteRouter = require('./delete-router')
 
 // static 주소는 use로 받아서 전달해야한다. 가변은 get으로 받아도 상관없다.
 router.post('/', saveRouter) // POST: 저장
-router.delete('/', viewRouter) // DELETE: 삭제
-router.get('/', listRouter) // HTML/GET: 리스트페이지
-router.use('/form', formRouter) // HTML: 글작성페이지
-router.get('/:idx', viewRouter) // HTML/GET: 상세페이지
+router.delete('/', deleteRouter) // DELETE: 삭제
+router.use('/form', formRouter) // HTML: 글작성(수정)페이지
+router.use(['/', '/list', '/list/:page'], listRouter) // HTML/GET: 리스트페이지
+router.use('/view', viewRouter) // HTML/GET: 상세페이지
+
 module.exports = router
 
-/* 
-GET    /book - 전체리스트
-GET    /book?page=1 - 페이지리스트 LIST
-GET    /book/1 - 상세리스트 VIEW
+/*  Restful 진영에서는 주소를 method로 구분하는 것을 권장하고 있다.
+
+GET    [/book, /book/list] - 페이지리스트 LIST - 1page
+GET    /book/list/:page - 페이지리스트 LIST - 해당페이지
+GET    /book/view/1 - 상세리스트 VIEW
+GET    /book/update/1 - 상세리스트 update
 POST   /book - 저장 save
 PUT    /book - 업데이트 update
 DELETE /book - 삭제 delete

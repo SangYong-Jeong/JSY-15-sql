@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const methodInit = require('./modules/method-init')
 
 /*************** server init **************/
 require('dotenv').config()
@@ -17,6 +18,7 @@ app.locals.tabTitle = 'Express 게시판' // locals는 view들이 접근할수�
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(methodInit())
 
 
 /*************** static init **************/

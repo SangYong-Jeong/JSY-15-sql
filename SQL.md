@@ -82,3 +82,31 @@ ALTER user 'sample'@'%' IDENTIFIED WITH mysql_native_password BY '000000';
 GRANT ALL PRIVILEGES ON sample.* TO 'sample'@'%';
 FLUSH PRIVILEGES;
 ```
+
+## SQL문
+```sql
+INSERT
+UPDATE: WHERE
+DELETE: WHERE
+SELECT: WHERE, ORDER BY, LIMIT
+
+INSERT INTO 테이블명 SET 필드명1=값1, 필드명2=값2 ...;
+INSERT INTO 테이블명 (필드명1, 필드명2...) VALUES (값1, 값2...);
+UPDATE 테이블명 SET 필드명1=값1, 필드명2=값2 ... [필수] WHERE;
+DELETE FROM 테이블명 [필수] WHERE;
+
+SELECT 필드명1, 필드명2 ... FROM 테이블명;
+SELECT * FROM 테이블명;
+SELECT COUNT(idx) FROM 테이블명 [선택] WHERE (ORDER BY 를 쓰면 에러가 난다.);
+SELECT * FROM 테이블명 WHERE idx=1;
+SELECT * FROM 테이블명 WHERE idx>=5 AND idx<=9;
+SELECT * FROM 테이블명 WHERE title='나비'; -- 나비
+SELECT * FROM 테이블명 WHERE title LIKE '나비'; -- 나비
+SELECT * FROM 테이블명 WHERE title LIKE '나비%'; -- 나비.....
+SELECT * FROM 테이블명 WHERE title LIKE '%나비'; -- ....나비
+SELECT * FROM 테이블명 WHERE title LIKE '%나비%'; -- ...나비...
+SELECT * FROM 테이블명 WHERE ... ORDER BY idx DESC;
+SELECT * FROM 테이블명 WHERE ... ORDER BY idx ASC;
+SELECT * FROM 테이블명 WHERE ... ORDER BY title ASC, content DESC; -- 이 경우 앞에 먼저 줄세운게 기준이 되서 다음 ORDER BY 적용됨
+SELECT * FROM 테이블명 WHERE ... ORDER BY ... LIMIT 시작idx, 갯수;
+```

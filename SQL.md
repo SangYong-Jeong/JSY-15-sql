@@ -109,4 +109,23 @@ SELECT * FROM 테이블명 WHERE ... ORDER BY idx DESC;
 SELECT * FROM 테이블명 WHERE ... ORDER BY idx ASC;
 SELECT * FROM 테이블명 WHERE ... ORDER BY title ASC, content DESC; -- 이 경우 앞에 먼저 줄세운게 기준이 되서 다음 ORDER BY 적용됨
 SELECT * FROM 테이블명 WHERE ... ORDER BY ... LIMIT 시작idx, 갯수;
+
+-- LEFT JOIN
+SELECT B.*, F.oriname, F.savename, F.idx AS fileidx 
+FROM books B 
+LEFT JOIN files F 
+ON B.idx = F.fidx 
+WHERE B.status < 3
+ORDER BY idx DESC
+LIMIT 0,5 
+
+-- LEFT JOIN
+SELECT books.*, files.oriname, files.savename, files.idx AS fileidx 
+FROM books 
+LEFT JOIN files  
+ON books.idx = files.fidx 
+WHERE books.status < 3
+ORDER BY idx DESC
+LIMIT 0,5 
+
 ```

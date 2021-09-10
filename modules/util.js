@@ -32,12 +32,12 @@ const cutTail = (str, len = 12) => str.length > len ? str.substr(0, len) + ' ...
 
 const chgStatus = status => {
 	switch(status) {
-		case '0':
-			return '절판'
 		case '1':
 			return '판매중'
 		case '2':
 			return '발행예정'
+		case '3':
+			return '절판'
 		default:
 			return '기타'
 	}
@@ -54,8 +54,8 @@ const moveFile = async file => {
 	try{
 		let savePath = path.join(__dirname, '../storages-remove', file.split('_')[0])
 		const oldPath = absPath(file)
-		await fs.ensureDir(savePath)
-		savePath = path.join(savePath, file)
+		await fs.ensureDir(savePath) // D:\ ~ /210909
+		savePath = path.join(savePath, file) // D:\ ~ /210909/210909_SADHFSAJKHF-SFJSHDFJ.jpg
 		await fs.move(oldPath, savePath)
 		return true
 	}

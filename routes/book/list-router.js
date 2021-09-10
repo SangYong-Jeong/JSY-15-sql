@@ -9,8 +9,8 @@ const createPager = require('../../modules/pager-init')
 router.get(['/', '/:page'], async (req, res, next) => {
 	let sql, values
 	try {
-		console.time('start')
-		sql = 'SELECT COUNT(idx) FROM books WHERE status < "3"'
+		// console.time('start')
+		sql = "SELECT COUNT(idx) FROM books WHERE status > '0'"
 		const [[cnt]] = await pool.execute(sql)
 		const totalRecord = cnt['COUNT(idx)']
 		const page = Number(req.params.page) || 1
@@ -23,7 +23,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		ON B.idx = F.fidx AND F.fieldname = 'C'
 		LEFT JOIN files F2
 		ON B.idx = F2.fidx AND F2.fieldname = 'U'
-		WHERE B.status < 3
+		WHERE B.status > '0'
 		ORDER BY B.idx DESC
 		LIMIT ?, ?
 		`
@@ -42,7 +42,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		const description = '등록된 도서들의 리스트 입니다.'
 		const js = 'book/list'
 		const css = 'book/list'
-		console.timeEnd('start')
+		// console.timeEnd('start')
 		res.status(200).render('book/list', {title, description, js, css, books, pager})
 
 	}

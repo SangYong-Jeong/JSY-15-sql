@@ -10,7 +10,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 	let sql, values
 	try {
 		console.time('start')
-		sql = 'SELECT COUNT(idx) FROM books WHERE status < "3"'
+		sql = "SELECT COUNT(idx) FROM books WHERE status > '0'"
 		const [[cnt]] = await pool.execute(sql)
 		const totalRecord = cnt['COUNT(idx)']
 		const page = Number(req.params.page) || 1
@@ -26,7 +26,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		(SELECT B.*, F.savename, F.fieldname
 		FROM books B LEFT JOIN files F
 		ON B.idx = F.fidx AND F.fieldname = 'U'
-		WHERE B.status < 3
+		WHERE B.status > '0'
 		ORDER BY B.idx DESC LIMIT ?,?)
 		ORDER BY idx DESC, fieldname ASC
 		`

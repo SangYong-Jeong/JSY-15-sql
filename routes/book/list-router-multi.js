@@ -10,13 +10,13 @@ router.get(['/', '/:page'], async (req, res, next) => {
 	let sql, values;
 	try {
 		console.time('start')
-		sql = "SELECT COUNT(idx) FROM books WHERE status < 3"
+		sql = "SELECT COUNT(idx) FROM books WHERE status > '0'"
 		const [[cnt]] = await pool.execute(sql)
 		const totalRecord = cnt['COUNT(idx)']
 		const page = Number(req.params.page || 1)
 		const pager = createPager(page, totalRecord, 5, 3)
 
-		sql = "SELECT * FROM books WHERE status < 3 ORDER BY idx DESC LIMIT ?, ?"
+		sql = "SELECT * FROM books WHERE status > '0' ORDER BY idx DESC LIMIT ?, ?"
 		values = [pager.startIdx.toString(), pager.listCnt.toString()]
 		const [books] = await pool.execute(sql, values)
 

@@ -21,15 +21,18 @@ app.use(express.urlencoded({ extended: false }))
 app.use(methodInit())
 
 
+
 /*************** static init **************/
 app.use('/', express.static(path.join(__dirname, 'public')))
 app.use('/uploads', express.static(path.join(__dirname, 'storages')))
 
 
 /*************** router init **************/
+const langMW = require('./middlewares/lang-mw')
 const bookRouter = require('./routes/book')
-
+app.use(langMW)
 app.use('/book', bookRouter)
+
 
 
 /**************** error init **************/

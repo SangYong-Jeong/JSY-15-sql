@@ -18,8 +18,7 @@ app.locals.tabTitle = 'Express 게시판' // locals는 view들이 접근할수�
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(methodInit())
-
+app.use(methodInit()) // method-override
 
 
 /*************** static init **************/

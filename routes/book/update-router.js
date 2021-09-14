@@ -3,7 +3,7 @@ const router = express.Router()
 const { error } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 
-router.put('/', async (req, res, next) => {
+router.post('/:idx', async (req, res, next) => {
 	try {
 		const { title, writer, content, idx } = req.body
 		const sql = 'UPDATE books SET title=?, writer=?, content=? WHERE idx=?'

@@ -4,7 +4,7 @@ const router = express.Router()
 const { error, moveFile } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:idx', async (req, res, next) => {
 	try {
 		sql = "UPDATE files SET status='0' WHERE idx = " + req.params.idx
 		await pool.execute(sql)

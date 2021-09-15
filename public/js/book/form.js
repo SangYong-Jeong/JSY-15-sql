@@ -12,6 +12,10 @@ function onSubmit(e) {
 	this.submit()
 }
 
+// /언어/book/ www.myshop.co.kr 	:3000
+// /book/			 api.myshop.co.kr 	:3001 
+// /					 admin.myshop.co.kr :3002
+
 document.querySelector('#btRemoveFile').addEventListener('click', onRemoveFile)
 document.querySelector('#btRemoveCover').addEventListener('click', onRemoveFile)
 
@@ -19,12 +23,13 @@ function onRemoveFile(e) {
 	var idx = this.dataset['idx'];
 	var lang = this.dataset['lang'];
 	var parent = this.parentNode;
-	axios.delete('/'+lang+'/book/api/file', {params: { idx: idx }}).then(onSuccess).catch(onError)
+	axios.delete('/book/file/'+ idx).then(onSuccess).catch(onError)
 	function onSuccess(r) {
-	
+		if(r.data.code === 200) parent.remove()
 	}
 	
 	function onError(err) {
-	
+	console.log(err)
+	console.log(err.response)
 	}
 }

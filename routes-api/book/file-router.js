@@ -16,6 +16,7 @@ router.delete('/:idx', async (req, res, next) => {
 		await moveFile(savename)
 		}
 
+		
 		res.status(200).json({ code: 200, result: 'success'})
 	}
 	catch(err) {

@@ -1,0 +1,26 @@
+{
+	"cover": [
+	{
+	"fieldname": "cover",
+	"originalname": "f2.jpg",
+	"encoding": "7bit",
+	"mimetype": "image/jpeg",
+	"destination": "C:\\Users\\mmadu\\Documents\\정상용_수업\\15.SQL\\storages\\210915",
+	"filename": "210915_e1965aea-3510-46fc-b182-b4555d9ddb73.jpg",
+	"path": "C:\\Users\\mmadu\\Documents\\정상용_수업\\15.SQL\\storages\\210915\\210915_e1965aea-3510-46fc-b182-b4555d9ddb73.jpg",
+	"size": 28896
+	}
+	],
+	"upfile": [
+	{
+	"fieldname": "upfile",
+	"originalname": "Bridge - 19806.mp4",
+	"encoding": "7bit",
+	"mimetype": "video/mp4",
+	"destination": "C:\\Users\\mmadu\\Documents\\정상용_수업\\15.SQL\\storages\\210915",
+	"filename": "210915_04df812a-fb19-4256-97fc-fd54323d5885.mp4",
+	"path": "C:\\Users\\mmadu\\Documents\\정상용_수업\\15.SQL\\storages\\210915\\210915_04df812a-fb19-4256-97fc-fd54323d5885.mp4",
+	"size": 354927
+	}
+	]
+	}

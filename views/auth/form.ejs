@@ -1,10 +1,11 @@
 <%- include('../inc/head', {css}) %> 
 <%- include('../inc/header') %>
+<%- include('../inc/banner-auth.ejs') %> 
 <script src="/js/promise.polyfill.min.js"></script>
 <script src="/js/axios.min.js"></script>
 <div class="form-wrapper wrapper">
-	<%- include('../inc/title-book') %> 
-	<form action="/<%= LANG %>/auth" name="saveForm" method="POST">
+	<%- include('../inc/title-bar') %> 
+	<form action="/<%= LANG %>/auth/form" name="saveForm" method="POST">
 		<table>
 			<tbody>
 				<!-- 아이디 -->
@@ -30,14 +31,14 @@
 				</tr>
 				<!-- 사용자 이름 -->
 				<tr>
-					<td class="title"><%= AUTH.USERNAME %></td>
+					<td class="title require"><%= AUTH.USERNAME %></td>
 					<td class="content">
 						<input type="text" name="username" class="form-control" placeholder="<%= AUTH.USERNAME %>">
 					</td>
 				</tr>
 				<!-- 이메일 -->
 				<tr>
-					<td class="title"><%= AUTH.EMAIL %></td>
+					<td class="title require"><%= AUTH.EMAIL %></td>
 					<td class="content">
 						<input type="text" name="email" class="form-control" placeholder="<%= AUTH.EMAIL %>">
 					</td>

@@ -7,6 +7,7 @@
 	outline: unset;
 	box-shadow: unset;
 }
+.form-control.active, .form-control.active:focus {border-color: #0059b0;}
 .form-control.error, .form-control.error:focus {border-color: #a70404;}
 
 .form-wrapper table {width: 100%; border: 1px solid #ddd;}

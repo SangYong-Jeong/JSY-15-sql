@@ -1,36 +1,67 @@
+/**
+ * userid 	: 6 ~ 24
+ * passwd 	: 6 ~ 24
+ * passwd === passwd2 
+ * email 검증
+ */
+
+var f = document.saveForm
+var useridEl = f.userid
+var passwdEl = f.passwd
+var passwd2El = f.passwd2
+var usernameEl = f.username
+var emailEl = f.email
+var useridTxt = document.querySelector('.userid')
+var passwdTxt = document.querySelector('.passwd')
+var passwd2Txt = document.querySelector('.passwd2')
+var usernameTxt = document.querySelector('.username')
+var emailTxt = document.querySelector('.email')
+
+console.log(useridEl)
+
 document.saveForm.addEventListener('submit', onSubmit)
-function onSubmit(e) {
+function onSubmit (e) {
 	e.preventDefault()
-	var title = this.title.value.trim()
-	var writer = this.writer.value.trim()
-	var content = this.content.value.trim()
-	if(!title) {
-		alert('도서명을 입력하세요.')
-		this.title.focus()
+	var userid = useridEl.value.trim()
+	var passwd = passwdEl.value.trim()
+	var passwd2 = passwd2El.value.trim()
+	var username = usernameEl.value.trim()
+	var email = emailEl.value.trim()
+
+	
+	if(passwd === '' ) {
 		return false
 	}
-	this.submit()
+	if(passwd.length < 6 || passwd.length > 24) {
+		return false
+	}
+	if(passwd2 === '' ) {
+		return false
+	}
+	if(passwd2.length < 6 || passwd2.length > 24) {
+		return false
+	}
+	if(passwd !== passwd2) {
+		return false
+	}
+	if(username === '' ) {
+		return false
+	}
+	if(email === '' ) {
+		return false
+	}
 }
 
-// /언어/book/ www.myshop.co.kr 	:3000
-// /book/			 api.myshop.co.kr 	:3001 
-// /					 admin.myshop.co.kr :3002
-
-if(document.querySelector('#btRemoveFile'))
-	document.querySelector('#btRemoveFile').addEventListener('click', onRemoveFile)
-if(document.querySelector('#btRemoveCover'))
-	document.querySelector('#btRemoveCover').addEventListener('click', onRemoveFile)
-
-function onRemoveFile(e) {
-	var idx = this.dataset['idx'];
-	var parent = this.parentNode;
-	axios.delete('/api/book/file/'+ idx).then(onSuccess).catch(onError)
-	function onSuccess(r) {
-		if(r.data.code === 200) parent.remove()
+function verifyUserId() {
+	if(userid === '' ) { 
+		useridTxt.classList.add('error')
+		useridTxt.innerHTML = ERR.ID_NULL
+		useridEl.classList.add('error')
+		useridEl.focus()
+		return false
 	}
-	
-	function onError(err) {
-	console.log(err)
-	console.log(err.response)
+	if(userid.length < 6 || userid.length > 24 ) {
+		return false
 	}
+	return true
 }

@@ -3,7 +3,7 @@ const moment = require('moment')
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
-const { error, cutTail, chgStatus, getIcon, relPath } = require('../../modules/util')
+const { cutTail, chgStatus, getIcon, relPath } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 const createPager = require('../../modules/pager-init')
 
@@ -20,7 +20,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		const pager = createPager(page, totalRecord, 5, 3)
 
 		sql = `
-		SELECTB.*, F.savename AS cover, F2.savename AS icon 
+		SELECT B.*, F.savename AS cover, F2.savename AS icon 
 		FROM books B 
 		LEFT JOIN files F
 		ON B.idx = F.fidx AND F.fieldname = 'C' AND F.status > '0'

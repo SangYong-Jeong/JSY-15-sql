@@ -5,7 +5,7 @@
 	if(typeof opt.key === 'object') {
 		where += ` AND (`
 		opt.key.fields.forEach((v, i)=>{
-			where += ` ${v} = '${opt.value[i]}'' `
+			where += ` ${v} = '${opt.value[i]}' `
 			if(i < opt.key.fields.length - 1) where += ` ${opt.key.op} `
 		})
 		where += `)`

@@ -19,7 +19,6 @@ var usernameTxt = document.querySelector('.username')
 var emailTxt = document.querySelector('.email')
 
 
-console.log(useridEl)
 
 f.addEventListener('submit', onSubmit)
 useridEl.addEventListener('blur', verifyUserid)
@@ -56,7 +55,15 @@ function verifyUserid () {
 		return verifyFalse(useridEl, useridTxt, ERR.ID_VALID)
 	}
 	else {
-		axios.get('/api/auth/verify', {params: { key: 'userid', value: userid }})
+		$.get('/api/auth/verify', { key: 'userid', value: userid }, function (r, status, xhr) {
+			console.log(r)
+			console.log(status)
+			console.log(xhr)
+			if(xhr.status > 200) return verifyFalse(useridEl, useridTxt, xhr.responseJSON.msg)
+			else if(r.isUsed) return verifyFalse(useridEl, useridTxt, ERR.ID_TAKEN)
+			else return verifyTrue(useridEl, useridTxt)
+		})
+		/* axios.get('/api/auth/verify', {params: { key: 'userid', value: userid }})
 		.then(function (r) {
 			if(r.data.isUsed) return verifyFalse(useridEl, useridTxt, ERR.ID_TAKEN)
 			else 	return verifyTrue(useridEl, useridTxt, ERR.ID_OK)
@@ -64,6 +71,7 @@ function verifyUserid () {
 		.catch(function(err) {
 			return verifyFalse(useridEl, useridTxt, err.response.data.msg)
 		})
+		*/
 	}
 }
 
@@ -131,6 +139,15 @@ function verifyEmail () {
 		return verifyFalse(emailEl, emailTxt, ERR.EMAIL_VALID)
 	}
 	else {
+		$.get('/api/auth/verify', { key: 'email', value: email }, function (r, status, xhr) {
+			console.log(r)
+			console.log(status)
+			console.log(xhr)
+			if(xhr.status > 200) return verifyFalse(emailEl, emailTxt, xhr.responseJSON.msg)
+			else if(r.isUsed) return verifyFalse(emailEl, emailTxt, ERR.EMAIL_TAKEN)
+			else return verifyTrue(emailEl, emailTxt)
+		})
+		/*
 		axios.get('/api/auth/verify', {params: { key: 'email', value: email }})
 		.then(function (r) {
 			if(r.data.isUsed) return verifyFalse(emailEl, emailTxt, ERR.EMAIL_TAKEN)
@@ -139,6 +156,7 @@ function verifyEmail () {
 		.catch(function(err) {
 			return verifyFalse(emailEl, emailTxt, err.response.data.msg)
 		})
+		*/
 	}
 }
 

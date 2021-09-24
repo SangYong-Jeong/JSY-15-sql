@@ -18,7 +18,8 @@ var passwd2Txt = document.querySelector('.passwd2')
 var usernameTxt = document.querySelector('.username')
 var emailTxt = document.querySelector('.email')
 
-
+var validId = false
+var validEmail = false
 
 f.addEventListener('submit', onSubmit)
 useridEl.addEventListener('blur', verifyUserid)
@@ -35,14 +36,36 @@ emailEl.addEventListener('blur', verifyEmail)
 function onSubmit (e) {
 	e.preventDefault()
 	
-	var isUserid = verifyUserid()
 	var isPasswd = verifyPasswd()
 	var isPasswd2 = verifyPasswd2()
 	var isPasswdEqual = verifyPasswdEqual()
 	var isUsername = verifyUsername()
-	var isEmail = verifyEmail()
 	
-	if(isUserid && isPasswd && isPasswd2 && isPasswdEqual && isUsername && isEmail) f.submit()
+	if(  isPasswd && isPasswd2 && isPasswdEqual && isUsername) {
+		axios
+		.get('/api/auth/verify', {params: { key: 'userid', value: useridEl.value.trim() }})
+			.then(function (r) {
+				if(r.data.isUsed) return verifyFalse(useridEl, useridTxt, ERR.ID_TAKEN)
+				else {
+					verifyTrue(useridEl, useridTxt, ERR.ID_OK)
+					axios
+					.get('/api/auth/verify', {params: { key: 'email', value: emailEl.value.trim() }})
+					.then(function (r) {
+						if(r.data.isUsed) return verifyFalse(emailEl, emailTxt, ERR.EMAIL_TAKEN)
+						else {
+							verifyTrue(emailEl, emailTxt)
+							f.submit()
+						}
+					})
+					.catch(function(err) {
+						return verifyFalse(emailEl, emailTxt, err.response.data.msg)
+					})
+				}
+			})
+			.catch(function(err) {
+				return verifyFalse(useridEl, useridTxt, err.response.data.msg)
+			})
+	}
 }
 
 function verifyUserid () {
@@ -54,24 +77,15 @@ function verifyUserid () {
 	else if (!validator.isAlphanumeric(userid)) {
 		return verifyFalse(useridEl, useridTxt, ERR.ID_VALID)
 	}
-	else {
-		$.get('/api/auth/verify', { key: 'userid', value: userid }, function (r, status, xhr) {
-			console.log(r)
-			console.log(status)
-			console.log(xhr)
-			if(xhr.status > 200) return verifyFalse(useridEl, useridTxt, xhr.responseJSON.msg)
-			else if(r.isUsed) return verifyFalse(useridEl, useridTxt, ERR.ID_TAKEN)
-			else return verifyTrue(useridEl, useridTxt)
-		})
-		/* axios.get('/api/auth/verify', {params: { key: 'userid', value: userid }})
+	else { 
+		axios.get('/api/auth/verify', {params: { key: 'userid', value: userid }})
 		.then(function (r) {
 			if(r.data.isUsed) return verifyFalse(useridEl, useridTxt, ERR.ID_TAKEN)
-			else 	return verifyTrue(useridEl, useridTxt, ERR.ID_OK)
+			else validId = verifyTrue(useridEl, useridTxt, ERR.ID_OK)
 		})
 		.catch(function(err) {
 			return verifyFalse(useridEl, useridTxt, err.response.data.msg)
 		})
-		*/
 	}
 }
 
@@ -139,24 +153,14 @@ function verifyEmail () {
 		return verifyFalse(emailEl, emailTxt, ERR.EMAIL_VALID)
 	}
 	else {
-		$.get('/api/auth/verify', { key: 'email', value: email }, function (r, status, xhr) {
-			console.log(r)
-			console.log(status)
-			console.log(xhr)
-			if(xhr.status > 200) return verifyFalse(emailEl, emailTxt, xhr.responseJSON.msg)
-			else if(r.isUsed) return verifyFalse(emailEl, emailTxt, ERR.EMAIL_TAKEN)
-			else return verifyTrue(emailEl, emailTxt)
-		})
-		/*
 		axios.get('/api/auth/verify', {params: { key: 'email', value: email }})
 		.then(function (r) {
 			if(r.data.isUsed) return verifyFalse(emailEl, emailTxt, ERR.EMAIL_TAKEN)
-			else return verifyTrue(emailEl, emailTxt)
+			else validEmail = verifyTrue(emailEl, emailTxt)
 		})
 		.catch(function(err) {
 			return verifyFalse(emailEl, emailTxt, err.response.data.msg)
 		})
-		*/
 	}
 }
 

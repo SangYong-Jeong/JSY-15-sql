@@ -22,14 +22,14 @@ const isValid = (user) => {
 
 
 module.exports = async (user) => {
-	let { userid, passwd, passwd2, username, email, sql, hashPasswd } = user
+	let { userid, passwd, username, email, sql, hashPasswd } = user
 	let { BCRYPT_SALT: salt, BCRYPT_ROUND: round } = process.env
 	try { 
 		hashPasswd = await bcrypt.hash(passwd + salt, Number(round))
 		// 검증
 		if(isValid(user) !== true) return { success: false, msg: isValid(user).msg }
-		if(isUser(userid)) return { success: false, msg: '아이디가 존재합니다.' }
-		if(isEmail(email)) return { success: false, msg: '이메일이 존재합니다.' }
+		if(await isUser(userid)) return { success: false, msg: '아이디가 존재합니다.' }
+		if(await isEmail(email)) return { success: false, msg: '이메일이 존재합니다.' }
 			
 		sql = " INSERT INTO users SET userid=?, passwd=?, username=?, email=? "
 		const [rs] = await pool.execute(sql, [userid, hashPasswd, username, email])

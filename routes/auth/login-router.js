@@ -5,8 +5,9 @@ const createError = require('http-errors')
 const { pool } = require('../../modules/mysql-init')
 const {alert} = require('../../modules/util')
 const { loginUser } = require('../../models/auth')
+const {isUser, isGuest} = require('../../middlewares/auth-mw')
 
-router.get('/', (req, res, next) => { // login 창 보여주기
+router.get('/', isGuest, (req, res, next) => { // login 창 보여주기
 	req.app.locals.PAGE = 'LOGIN'
 	req.app.locals.js = 'auth/login'
 	req.app.locals.css = 'auth/login'

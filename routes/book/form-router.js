@@ -1,20 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
-const { relPath } = require('../../modules/util')
+const { relPath, alert } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 const { NO_EXIST } = require('../../modules/lang-init')
+const {isUser, isGuest} = require('../../middlewares/auth-mw')
 
-router.get('/', (req, res, next) => {
+router.get('/', isUser, (req, res, next) => {
 	req.app.locals.PAGE = 'CREATE'
 	// 이렇게 하면 render 시 객체로 보내지 않는다. 대신 다른 라우터에서 같은 변수명 쓸 시 덮어써야하는 문제 존재
 	req.app.locals.js = 'book/form'
 	req.app.locals.css = 'book/form'
-	const book = null
-	res.status(200).render('book/form', {book})
+	req.app.locals.book = null
+	res.status(200).render('book/form')
 })
 
-router.get('/:idx', async (req, res, next) => {
+router.get('/:idx', isUser, async (req, res, next) => {
 	req.app.locals.PAGE = 'UPDATE'
 	req.app.locals.js = 'book/form'
 	req.app.locals.css = 'book/form'

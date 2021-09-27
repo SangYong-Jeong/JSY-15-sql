@@ -10,6 +10,8 @@ const createPager = require('../../modules/pager-init')
 
 router.get(['/', '/:page'], async (req, res, next) => {
 	req.app.locals.PAGE = 'LIST'
+	req.app.locals.js = 'book/list'
+	req.app.locals.css = 'book/list'
 	let sql, values
 	try {
 		// console.time('start')
@@ -42,10 +44,9 @@ router.get(['/', '/:page'], async (req, res, next) => {
 			v.icon = v.icon ? getIcon(v.icon) : null
 		}) 
 		
-		const js = 'book/list'
-		const css = 'book/list'
+		
 		// console.timeEnd('start')
-		res.status(200).render('book/list', {js, css, books, pager})
+		res.status(200).render('book/list', {books, pager})
 
 	}
 	catch(err) {

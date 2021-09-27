@@ -4,8 +4,8 @@
   "description": "",
   "main": "01.app.js",
   "scripts": {
-    "start": "nodemon app",
-    "api": "nodemon api",
+    "start": "supervisor app",
+    "api": "supervisor api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "fs-extra": "^10.0.0",
     "helmet": "^4.6.0",
@@ -38,6 +39,7 @@
     "mysql2": "^2.3.0",
     "numeral": "^2.0.6",
     "passport": "^0.4.1",
+    "rotating-file-stream": "^2.1.6",
     "sequelize": "^6.6.5",
     "uuid": "^8.3.2",
     "validator": "^13.6.0"

@@ -1,5 +1,6 @@
 /*
 * fields : [['fieldname', 'value'],[],[]]
+
 */
 
 const { pool } = require('../../modules/mysql-init')

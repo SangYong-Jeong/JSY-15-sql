@@ -1,6 +1,6 @@
-<%- include('../inc/head', {css}) %> 
-<%- include('../inc/header') %>
-<%- include('../inc/banner-book.ejs') %>
+<%- include('../inc/head', { css }) %> 
+<%- include('../inc/header') %> 
+<%- include('../inc/banner-book') %> 
 <div class="view-wrapper wrapper">
 	<%- include('../inc/title-bar') %> 
 	<table>
@@ -29,33 +29,39 @@
 				<td class="title"><%= FIELD.COVER %></td>
 				<td class="content">
 					<% if(book.cover) { %> 
-					<img src="<%= book.cover %>" alt="<%= FIELD.COVER %>" class="book-img">
-					<% } else { %> 
+						<img src="<%= book.cover %>" alt="<%= FIELD.COVER %>" class="book-img">
+					<% } else { %>
 						<img src="//via.placeholder.com/120x160?text=No+Cover" alt="<%= FIELD.COVER %>" class="book-img">
-					<% } %> 
+					<% } %>
 				</td>
 			</tr>
-			<% if(book.upfile) { %> 
+			<% if(book.upfile) { %>
 				<tr>
 					<td class="title"><%= FIELD.UPFILE %></td>
 					<td class="content">
 						<% if(book.isImg) { %> 
 							<img src="<%= book.upfile %>" alt="<%= FIELD.UPFILE %>" class="book-img">
-						<% } %> 
-						<a href="/<%= LANG %>/book/download/<%= book.id2 %>" class="my-2 d-block"><%= book.oriname2 || ''  %></a> 
+						<% } %>
+						<a href="/<%= LANG %>/book/download/<%= book.id2 %>" class="my-2 d-block"><%= book.oriname2 || '' %></a>
 					</td>
 				</tr>
-			<% } %> 
+			<% } %>
 		</tbody>
 	</table>
-	<div class="btn-wrap p-3 text-center d-flex">
-		<a href="/<%= LANG %>/book" class="btn btn-primary"><%= BT.LIST %></a>
-		<button class="btn btn-success ml-auto mr-1" id="btUpdate" data-idx="<%= book.idx %>" data-lang="<%= LANG %>"><%= BT.UPDATE %></button>
-		<button class="btn btn-danger"  id="btDelete" data-msg="<%= MSG.DELETE %>"><%= BT.DELETE %></button>
-	</div>
-	<form action="/<%= LANG %>/book" method="POST" name="deleteForm">
-		<input type="hidden" name="_method" value="DELETE">
-		<input type="hidden" name="idx" value="<%= book.idx %>">
-	</form>
+	<% if (user && user.idx === book.fidx) { %>
+		<div class="btn-wrap py-3 d-flex">
+			<a href="/<%= LANG %>/book" class="btn btn-primary"><%= BT.LIST %></a>
+				<button class="btn btn-success ml-auto mr-1" id="btUpdate" data-idx="<%= book.idx %>" data-lang="<%= LANG %>"><%= BT.UPDATE %></button>
+				<button class="btn btn-danger" id="btDelete" data-msg="<%= MSG.DELETE %>"><%= BT.DELETE %></button>
+		</div>
+		<form action="/<%= LANG %>/book" method="POST" name="deleteForm">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="hidden" name="idx" value="<%= book.idx %>">
+		</form>
+	<% } else { %>
+		<div class="btn-wrap py-3 d-flex justify-content-center">
+			<a href="/<%= LANG %>/book" class="btn btn-primary"><%= BT.LIST %></a>
+		</div>
+	<% } %>
 </div>
-<%- include('../inc/foot', {js}) %> 
+<%- include('../inc/foot', { js }) %> 

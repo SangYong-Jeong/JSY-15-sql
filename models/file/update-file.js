@@ -33,4 +33,4 @@ const updateFileStatus = async (fidx, status=0) => {
 	}
 }
 
-module.exports = { updateFileStatus } 
+module.exports = { updateFileStatus, updateFile } 

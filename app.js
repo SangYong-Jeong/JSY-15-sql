@@ -17,6 +17,11 @@ const locals = require('./middlewares/locals-mw')
 require('./modules/server-init')(app, process.env.PORT)
 
 
+/*************** static init **************/
+app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/uploads', express.static(path.join(__dirname, 'storages')))
+
+
 /************** view engine ***************/
 app.set('view engine', 'ejs')
 app.set('views', './views')
@@ -30,25 +35,15 @@ app.use(method())	// method-override
 app.use(session(app))
 
 
-
-
-
-
-/*************** static init **************/
-app.use('/', express.static(path.join(__dirname, 'public')))
-app.use('/uploads', express.static(path.join(__dirname, 'storages')))
-
 /*************** passport ***************/
 passportModule(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 
+
 /*************** locals ***************/
-app.use((req,res,next)=>{console.log(req.user);
-	next()
-	console.log(req.session.user)
-	})
 app.use(locals)
+
 
 /*************** logger init **************/
 app.use(logger)

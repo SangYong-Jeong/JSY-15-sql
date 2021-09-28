@@ -16,6 +16,17 @@ const arg = {...arr}
 console.log(arg)
 const name = {naem: 'jsy'}
 console.log(name)
-const arg2 = [...name]
-console.log(arg2)
+
+
+defaultValue = {
+    name : 'anonymous',
+    gender : 'unknown'
+}
+newValue = {
+    name : 'Jack',
+        gender : 'male'
+}
+const mergedValue = Object.assign(defaultValue , newValue)
+
+console.log({...defaultValue, ...newValue})
 </script>

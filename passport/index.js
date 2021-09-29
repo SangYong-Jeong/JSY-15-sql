@@ -1,4 +1,5 @@
 const local = require('./local-strategy')
+const kakao = require('./kakao-strategy')
 const { findUser } = require('../models/auth')
 
 const serialize = (user, done) => {
@@ -20,7 +21,7 @@ module.exports = passport => {
 	passport.serializeUser(serialize)    // req.session.passport.user -> idx (cookie -> session)
 	passport.deserializeUser(deserialize) // req.user <- DB user 정보 받아 req.user (sesiion)
 	local(passport)
-	// kakao(passport)
+	kakao(passport)
 	// naver(passport)
 	// facebook(passport)
 }

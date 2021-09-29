@@ -1,7 +1,8 @@
 const validator = require('validator')
 const bcrypt = require('bcrypt')
+const createError = require('http-errors')
 const {pool} = require('../../modules/mysql-init')
-const {isVerify} = require('./find-user')
+const {existUser} = require('./find-user')
 
 const isValid = (user) => {
 	let { userid, passwd, passwd2, username, email } = user
@@ -21,15 +22,17 @@ const isValid = (user) => {
 }
 
 
-module.exports = async (user) => {
+const createUser = async (user) => {
 	let { userid, passwd, username, email, sql, hashPasswd } = user
 	let { BCRYPT_SALT: salt, BCRYPT_ROUND: round } = process.env
 	try { 
 		hashPasswd = await bcrypt.hash(passwd + salt, Number(round))
 		// 검증
 		if(isValid(user) !== true) return { success: false, msg: isValid(user).msg }
-		if(await isVerify('userid',userid)) return { success: false, msg: '아이디가 존재합니다.' }
-		if(await isVerify('email',email)) return { success: false, msg: '이메일이 존재합니다.' }
+		let {success} = await existUser('userid',userid)
+		if(success) return { success: false, msg: '아이디가 존재합니다.' }
+		let {success: success2} = await existUser('email',email)
+		if(success2) return { success: false, msg: '이메일이 존재합니다.' }
 			
 		sql = " INSERT INTO users SET userid=?, passwd=?, username=?, email=? "
 		const [rs] = await pool.execute(sql, [userid, hashPasswd, username, email])
@@ -39,3 +42,30 @@ module.exports = async (user) => {
 		return {success: false, err}
 	}
 }
+
+const createSnsUser = async ({userid}, { accessToken, refreshToken, provider, snsid, snsname, displayName, profileURL, email }) => {
+	let sql
+	try {
+		sql = " INSERT INTO users SET userid=? "
+		const [{insertId: idx}] = await pool.execute(sql, [userid])
+
+		sql = ` INSERT INTO users_sns SET 
+		fidx=?,
+		accessToken=?, 
+		refreshToken=?, 
+		provider=?, 
+		snsid=?, 
+		snsname=?,  
+		displayName=?,
+		profileURL=?,
+		email=?	`
+		await pool.execute(sql, [idx, accessToken, refreshToken, provider, snsid, snsname, displayName, profileURL, email])
+		return { success: true, idx}
+	}
+	catch(err) {
+		throw new Error(err)
+	}
+}
+
+
+module.exports = {createUser, createSnsUser }

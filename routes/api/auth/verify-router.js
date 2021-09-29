@@ -3,12 +3,12 @@ const express = require('express')
 const router = express.Router()
 const { pool } = require('../../../modules/mysql-init')
 const createError = require('http-errors')
-const {isVerify} = require('../../../models/auth')
+const {existUser} = require('../../../models/auth')
 
 router.get('/verify', async (req, res, next) => { // userid, email 중복 검증
 	try {
-		const isUsed = await isVerify(req.query.key, req.query.value)
-		res.status(200).json({ isUsed})
+		const {success: isUsed} = await existUser(req.query.key, req.query.value)
+		res.status(200).json({ isUsed })
 	}
 	catch(err) {
 		next(createError(err))

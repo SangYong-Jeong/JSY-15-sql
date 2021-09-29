@@ -4,12 +4,10 @@ const router = express.Router()
 const passport = require('passport')
 // const {  } = require('../../models/auth')
 
-router.get('/', passport.authenticate('kakao', {	failureRedirect: '/'}), (req, res, next)=>{
+router.get('/', passport.authenticate('kakao'))
+
+router.get('/cb', passport.authenticate('kakao', {failureRedirect: '/'}), (req, res, next) => {
 	res.redirect('/')
-} )
-
-router.get('/cb', (req, res, next) => {
-
-})	
+})
 
 module.exports = router

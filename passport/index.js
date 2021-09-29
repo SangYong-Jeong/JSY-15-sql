@@ -12,7 +12,9 @@
 
 const local = require('./local-strategy')
 const kakao = require('./kakao-strategy')
+const naver = require('./naver-strategy')
 const { findUser } = require('../models/auth')
+
 
 const serialize = (user, done) => {
 	done(null, user.idx)
@@ -34,5 +36,5 @@ module.exports = passport => {
 	passport.deserializeUser(deserialize)		// req.user <- DB user 정보 (session)
 	local(passport)
 	kakao(passport)
-	// naver(passport)
+	naver(passport)
 }

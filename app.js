@@ -37,6 +37,7 @@ app.use(session(app))
 
 /*************** passport ***************/
 passportModule(passport)
+app.use((req,res,next)=>{console.log(req.user); next()})
 app.use(passport.initialize())
 app.use(passport.session())
 

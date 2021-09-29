@@ -17,8 +17,8 @@ const deserialize = async (idx, done) => {
 }
 
 module.exports = passport => {
-	passport.serializeUser(serialize)
-	passport.deserializeUser(deserialize)
+	passport.serializeUser(serialize)    // req.session.passport.user -> idx (cookie -> session)
+	passport.deserializeUser(deserialize) // req.user <- DB user 정보 받아 req.user (sesiion)
 	local(passport)
 	// kakao(passport)
 	// naver(passport)

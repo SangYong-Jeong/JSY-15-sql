@@ -29,6 +29,9 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 	}
 }
 
+// http://127.0.0.1:3000/auth/kakao/cb
+// http://localhost:3000/auth/kakao/cb
+
 const kakaoStrategy = new KakaoStrategy({
 	clientID: process.env.KAKAO_KEY,
 	clientSecret: process.env.KAKAO_SALT,

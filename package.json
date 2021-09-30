@@ -5,7 +5,7 @@
   "main": "01.app.js",
   "scripts": {
     "start": "nodemon app",
-    "api": "supervisor api",
+    "api": "supervisor app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

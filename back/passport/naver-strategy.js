@@ -9,7 +9,7 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 			refreshToken, 
 			provider: 'NA', 
 			snsid: profile.id,
-			snsname: profile._json.nickname || null,
+			snsname: profile._json.name || null,
 			displayName: profile.displayName || null,
 			profileURL: profile._json.profile_image || null,
 			email : profile._json.email || null,

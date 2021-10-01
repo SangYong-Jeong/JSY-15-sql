@@ -6,11 +6,11 @@ const path = require('path')
 const passport = require('passport')
 const passportModule = require('./passport')
 
-const langMW = require('./middlewares/lang-mw')
 const method = require('./middlewares/method-mw')
 const logger = require('./middlewares/morgan-mw')
 const session = require('./middlewares/session-mw')
 const locals = require('./middlewares/locals-mw')
+const langMW = require('./middlewares/lang-mw')
 
 
 /*************** server init **************/
@@ -31,15 +31,17 @@ app.locals.pretty = true
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(method())	// method-override
+app.use(method())
 app.use(session(app))
 
-/*************** passport ***************/
+
+/**************** passport ****************/
 passportModule(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 
-/*************** locals ***************/
+
+/***************** locals *****************/
 app.use(locals)
 
 
@@ -61,13 +63,11 @@ app.use('/auth', authRouter)
 app.use('/api/auth', apiAuthRouter)
 app.use('/mypage', mypageRouter)
 
+
 /**************** error init **************/
 const _404Router = require('./routes/error/404-router')
 const _500Router = require('./routes/error/500-router')
 
 app.use(_404Router)
 app.use(_500Router)
-
-
-
 

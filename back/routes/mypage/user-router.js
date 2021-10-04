@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 	try {
 		const { ERROR } = req.app.locals
 		const r = await updateUser(req.body)
-		if(r) res.redirect('/')
+		if(r) res.send(alert('User Updated', '/mypage/user'))
 		else res.send(alert(ERROR.SQL_ERROR))
 	}
 	catch(err) {

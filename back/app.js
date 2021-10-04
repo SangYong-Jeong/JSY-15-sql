@@ -34,7 +34,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(method())
 app.use(session(app))
 
-
 /**************** passport ****************/
 passportModule(passport)
 app.use(passport.initialize())

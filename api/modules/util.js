@@ -27,6 +27,9 @@ const exts = {imgExt, mediaExt, docExt, zipExt}
 
 const relPath = file => `/uploads/${file.split('_')[0]}/${file}`
 const absPath = file => path.join(__dirname, `../storages/${file.split('_')[0]}/${file}`)
+const serverPath = file => {
+  path.join(`${process.env.BACK_URL}/uploads/${file.split('_')[0]}/${file}`)
+}
 const moveFile = async file => {
 	try{
 		let savePath = path.join(__dirname, '../storages-remove', file.split('_')[0])
@@ -60,5 +63,6 @@ const alert = (msg, loc = '/') => {
 	</script>`
 }
 
-module.exports = {  location, cutTail, chgStatus, exts, relPath, absPath ,getIcon, isImg, moveFile, alert }
+
+module.exports = {  location, cutTail, chgStatus, exts, relPath, absPath ,getIcon, isImg, moveFile, alert, serverPath }
 

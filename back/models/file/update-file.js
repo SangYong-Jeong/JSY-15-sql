@@ -17,7 +17,7 @@ const updateFile = async (idx, fields) => {
 			: { success: false, idx, msg: 'Error' }
 	}
 	catch(err) {
-		return { success: false, err }
+		throw new Error(err)
 	}
 }
 
@@ -30,7 +30,7 @@ const updateFileStatus = async (fidx, status=0) => {
 			: { success: false, idx, msg: 'Error' }
 	}
 	catch(err) {
-		return { success: false, err }
+		throw new Error(err)
 	}
 }
 

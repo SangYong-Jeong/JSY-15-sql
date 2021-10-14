@@ -1,6 +1,6 @@
 /**
  * 1. 요청이 들어온다. 
- *  가. req.cookies의 존재 여부 확인
+ *  @ req.cookies의 존재 여부 확인
  *    - !존재
  *       = DB에서 origin과 apikey의 일치 여부 확인
  *        +  일치
@@ -22,7 +22,9 @@ const jwt = require('jsonwebtoken')
 
 const isApiUser = async (req, res, next) => {
   try {
-
+    console.log(req.protocol + '://' + req.headers.host)
+    console.log(req.query.apikey)
+    next()
   }
   catch (err) {
 

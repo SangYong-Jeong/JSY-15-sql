@@ -5,7 +5,6 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
-
 /*************** server init **************/
 require('./modules/server-init')(app, process.env.PORT)
 

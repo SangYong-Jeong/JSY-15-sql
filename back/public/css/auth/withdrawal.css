@@ -1,7 +1,6 @@
-.form-wrapper {}
 
 .form-control:focus {
-	color: unset;
+  color: unset;
 	background-color: unset;
 	border-color: #0059b0;
 	outline: unset;
@@ -14,6 +13,7 @@
 .form-wrapper table td {padding: .75em; border-bottom: 1px solid #dfdfdf;}
 .form-wrapper table td.title {width: 180px;} /*  */
 .form-wrapper table td.require::after {display: inline-block; content: '*'; color: #f10; margin-left: .5em; font-size: 1.25em;}
+.form-wrapper textarea[name="withdrawal"] {height: 150px;}
 
 .form-wrapper .valid {padding-top: .5em; color: #0059b0;}
 .form-wrapper .valid.error {color: #a70404;}

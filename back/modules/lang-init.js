@@ -73,6 +73,7 @@ module.exports = _lang => {
 					PASSWD2				: '패스워드 확인',
 					USERNAME			: '이름',
 					EMAIL					: '이메일',
+					MSG					  : '회원 탈퇴 사유',
 				},
 				MYPAGE : {
 					TITLE 				: '회원 정보 수정',
@@ -175,6 +176,7 @@ module.exports = _lang => {
 					PASSWD2				: 'Password confirm',
 					USERNAME			: 'User name',
 					EMAIL					: 'Email',
+          MSG					  : 'Reason for withdrawal',
 				},
 				MYPAGE : {
 					TITLE 				: 'User Information Update',

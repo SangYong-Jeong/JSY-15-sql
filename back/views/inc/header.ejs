@@ -9,6 +9,7 @@
 				<div class="navi-sub">
           <a href="/<%= LANG %>/mypage/user" class="sub"><%= GLOBAL.NAVI[6] %></a>
 					<a href="/<%= LANG %>/auth/logout" class="sub"><%= GLOBAL.NAVI[3] %></a>
+					<a href="/<%= LANG %>/auth/withdrawal" class="sub"><%= GLOBAL.NAVI[8] %></a>
 				</div>
 			</div>
       <% } else { %>
@@ -29,10 +30,6 @@
 		var host = location.host;
 		var pathname = location.pathname;
 		var path = pathname.split('/')
-    console.log(protocol)
-    console.log(host)
-    console.log(pathname)
-    console.log(path)
 		location.href = protocol + '//' + host + ((path[1] === 'ko' || path[1] === 'en') 
 			? pathname.replace('/'+path[1]+'/', '/'+_lang+'/')
 			:  '/'+ _lang + pathname);

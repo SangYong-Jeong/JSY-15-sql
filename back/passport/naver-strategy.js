@@ -16,7 +16,6 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 		}
 		if(success) {
       const { idx, status } = _user
-      user.idx = idx 
       if(status === '0') {
         const { success } = await changeUser(
           { status: '3' },
@@ -31,6 +30,7 @@ const cb = async (accessToken, refreshToken, profile, done) => {
         if(success && success2) user.idx = idx 
         else done('Error') 
       }
+      else user.idx = idx 
 		}
 		else {
 			let {idx: id} = await createSnsUser(user, userSns)

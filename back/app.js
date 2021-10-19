@@ -38,7 +38,6 @@ app.use(session(app))
 passportModule(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
 /***************** locals *****************/
 app.use(locals)
 

@@ -25,6 +25,9 @@ module.exports = _lang => {
             MSG_NULL    : '탈퇴 사유를 작성해 주세요.',
 					}
 				},
+        ALERT: {
+          WITHDRAWAL: '회원 탈퇴가 처리되었습니다.',
+        },
 				GLOBAL: {
 					LOGO					: '도서관리시스템',
 					TAB_TITLE			: 'Express 게시판',
@@ -129,6 +132,9 @@ module.exports = _lang => {
             MSG_NULL    : 'Please write the reason for withdrawal.',
 					}
 				},
+        ALERT: {
+          WITHDRAWAL: 'Membership cancellation has been processed.',
+        },
 				GLOBAL: {
 					LOGO					: 'BOOK MANAGEMENT SYSTEM',
 					TAB_TITLE			: 'Express Board',

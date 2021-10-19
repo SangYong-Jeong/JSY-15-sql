@@ -16,12 +16,18 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 		}
 		let { success, user: _user } = await findUser('userid', user.userid) 
     const { idx, status } = _user
-    console.log(status)
 		if(success) {
       if(status === '0') {
-        const { success } = await changeUser(idx, { status: '3' })
-        const { success: success2 } = await changeUser(idx, { status: '3' }, 'users_sns')
-        console.log(success2)
+        const { success } = await changeUser(
+          { status: '3' },
+          { idx },
+          'users'
+          )
+        const { success: success2 } = await changeUser(
+          { status: '3' },
+          { fidx: idx },
+          'users_sns'
+          )
         if(success && success2) user.idx = idx 
         else done('Error') 
       }

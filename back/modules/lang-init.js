@@ -53,6 +53,10 @@ module.exports = _lang => {
 					TITLE 				: '회원 로그인',
 					DESC 					: '회원님의 로그인 정보를 아래에 입력해 주세요.',
 				},
+				WITHDRAWAL: {
+					TITLE 				: '회원 탈퇴',
+					DESC 					: '탈퇴를 원하시면 아래의 정보를 입력해 주세요.',
+				},
 				FIELD : {
 					NO						: '번호',
 					TITLE					: '제목',
@@ -150,6 +154,10 @@ module.exports = _lang => {
 				LOGIN: {
 					TITLE 				: 'Member Login',
 					DESC 					: 'Please enter your login information below.',
+				},
+        WITHDRAWAL: {
+					TITLE 				: 'Membership Withdrawal',
+					DESC 					: 'If you wish to unsubscribe, please enter the information below.',
 				},
 				FIELD : {
 					NO						: 'No',

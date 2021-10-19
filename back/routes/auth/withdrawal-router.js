@@ -20,9 +20,11 @@ router.post('/', isUser, async (req, res, next) => { // 실제 탈퇴 처리
     const user = { ...req.body, idx: req.user.idx, status: req.user.status }
 		const { success } = await deleteUser(user)
     if(success) {
+      req.logout()
+      req.user = null
       req.session.destroy()
+      console.log(req.session)
       res.locals.user = null
-      req.logOut()
       res.send(alert(ALERT.WITHDRAWAL))
     }
     else res.send(alert(ERROR.SQL_ERROR))

@@ -14,6 +14,7 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 			profileURL: profile._json.profile_image || null,
 			email : profile._json.email || null,
 		}
+    let { success, user: _user } = await findUser('userid', user.userid)
 		if(success) {
       const { idx, status } = _user
       if(status === '0') {

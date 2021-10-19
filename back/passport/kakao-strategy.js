@@ -25,7 +25,7 @@ const cb = async (accessToken, refreshToken, profile, done) => {
           )
         const { success: success2 } = await changeUser(
           { status: '3' },
-          { fidx: idx },
+          { 'fidx': idx },
           'users_sns'
           )
         if(success && success2) user.idx = idx 

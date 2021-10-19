@@ -14,11 +14,13 @@ router.get('/', isUser, (req, res, next) => { // withdrawal 창 보여주기
 	res.status(200).render('auth/withdrawal')
 })
 
-router.post('/', async (req, res, next) => { // 실제 join 처리
+router.post('/', async (req, res, next) => { // 실제 탈퇴 처리
 	try {
-		const r = await createUser(req.body)
-		if(r) res.redirect('/')
-		else res.send(alert(req.app.locals.ERROR.SQL_ERROR))
+    const user = { ...req.body, idx: req.user.idx }
+    res.json(user)
+		// const r = await createUser(req.body)
+		// if(r) res.redirect('/')
+		// else res.send(alert(req.app.locals.ERROR.SQL_ERROR))
 	}
 	catch(err) {
 		next(createError(err))

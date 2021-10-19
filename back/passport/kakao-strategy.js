@@ -15,8 +15,9 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 			email : profile._json.kakao_account.email || null,
 		}
 		let { success, user: _user } = await findUser('userid', user.userid) 
-    const { idx, status } = _user
 		if(success) {
+      const { idx, status } = _user
+      user.idx = idx 
       if(status === '0') {
         const { success } = await changeUser(
           { status: '3' },

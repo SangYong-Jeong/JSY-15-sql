@@ -1,5 +1,5 @@
 const NaverStrategy = require('passport-naver').Strategy
-const {  createSnsUser, existUser, changeUser } = require('../models/auth')
+const {  createSnsUser, findUser, changeUser } = require('../models/auth')
 
 const cb = async (accessToken, refreshToken, profile, done) => {
 	try {
@@ -14,11 +14,20 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 			profileURL: profile._json.profile_image || null,
 			email : profile._json.email || null,
 		}
-		let {success, idx, status} = await existUser('userid', user.userid) 
 		if(success) {
-			if(status === '0') {
-        const { success } = await changeUser(idx, { status: '3' })
-        const { success: success2 } = await changeUser(idx, { status: '3' }, 'users_sns')
+      const { idx, status } = _user
+      user.idx = idx 
+      if(status === '0') {
+        const { success } = await changeUser(
+          { status: '3' },
+          { idx },
+          'users'
+          )
+        const { success: success2 } = await changeUser(
+          { status: '3' },
+          { fidx: idx },
+          'users_sns'
+          )
         if(success && success2) user.idx = idx 
         else done('Error') 
       }

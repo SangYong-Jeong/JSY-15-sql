@@ -3,18 +3,18 @@
 
 html, body {font-family: 'Noto Sans KR', sans-serif;}
 
-body {padding-bottom: 120px;}
 
-.wrapper {max-width: 992px; margin: auto; padding: 2em 1em;}
+.wrapper {max-width: 992px; margin: auto; padding: 1em 1em 0 2em;}
 
 .header-wrapper {background-color: darkslategrey; color: #f9f9f9; display: flex; align-items: center;}
 .header-wrapper h1.logo {font-size: 1.25em; padding: .75em;}
-.header-wrapper .navi-wrap {display: flex; margin-left: auto;}
+.header-wrapper .navi-wrap  {display: flex; margin-left: auto;}
 .header-wrapper .navi-wrap .navi {padding: 1em 1.5em;}
 .header-wrapper .navi-wrap .navi.ex {background-color: rgba(0, 0, 0, .5);}
 .header-wrapper .navi-wrap .navi:hover {background-color: mistyrose; color: darkslategrey;}
 
-
+.header-wrapper .mobile-wrap {display: none; margin-left: auto; padding: 1em 1.5em; cursor: pointer;}
+.header-wrapper .mobile-wrap:hover {background-color: mistyrose; color: darkslategrey;}
 
 .header-wrapper a:link {text-decoration: none; color: inherit;}
 .header-wrapper a:visited {text-decoration: none; color: inherit;}
@@ -38,3 +38,15 @@ body {padding-bottom: 120px;}
 
 .title-bar {font-size: 1.5em; margin-bottom: 1em;}
 .title-bar .bullet {display: inline-block; width: 4px;height: 12px; background-color: mediumaquamarine; margin-right: 8px;}
+
+
+@media screen and (max-width: 991px) {
+  .header-wrapper .mobile-wrap {display: block;}
+	.header-wrapper .navi-wrap {display: none; position: absolute; width: 100%; top: 50px; background-color: slategrey;}
+  .header-wrapper .navi {width: 25%; text-align: center;}
+}
+
+@media screen and (max-width: 767px) {
+  .header-wrapper .navi-wrap {flex-wrap: wrap;}
+  .header-wrapper .navi {width: 100%; font-size: 1.125em; text-align: left;}
+}

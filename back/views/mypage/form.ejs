@@ -3,7 +3,7 @@
 <script src="/js/promise.polyfill.min.js"></script> 
 <script src="/js/axios.min.js"></script> 
 <script src="/js/validator.min.js"></script> 
-<%- include('../inc/banner-auth') %> 
+<%- include('../inc/banner-book') %> 
 <div class="form-wrapper wrapper">
 	<%- include('../inc/title-bar') %> 
 	<form action="/<%= LANG %>/mypage/user" method="POST" name="saveForm">
@@ -84,7 +84,7 @@
 				<tr>
 					<td class="title require"><%= MYPAGE.APIKEY %></td>
 					<td class="content form-inline">
-						<input readonly type="text" name="apikey" class="apikey form-control flex-grow-1 mr-2" value="<%= apikey %>" placeholder="<%= MYPAGE.APIKEY %>">
+						<input readonly type="text" name="apikey" class="apikey form-control flex-grow-1" value="<%= apikey %>" placeholder="<%= MYPAGE.APIKEY %>">
 						<button type="button" id="btApikey" class="btn btn-warning"><%= BT.APIKEY %></button>
 						<div class="valid apikey"></div>
 					</td>

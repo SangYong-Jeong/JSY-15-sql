@@ -4,3 +4,8 @@
 .view-wrapper table .content-tr td:last-child {line-height: 1.25em;}
 
 .book-img {width: 120px;}
+
+
+@media screen and (max-width: 575px) {
+  .view-wrapper table .content-tr td:last-child {line-height: 1.5em;}
+}

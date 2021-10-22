@@ -34,7 +34,10 @@
 								<button type="button" class="btn btn-sm btn-danger" data-idx="<%= book.cover.idx %>" id="btRemoveCover">삭제</button>
 							</div>
 						<% } %> 
-						<input type="file" name="cover" class="form-control-file">
+            <div class="mo-cover-wrap">
+              <div class="mo-cover">표지</div>
+              <input type="file" name="cover" class="form-control-file">
+            </div>
 					</td>
 				</tr>
 				<tr>
@@ -46,7 +49,10 @@
 								<button type="button" class="btn btn-sm btn-danger" data-idx="<%= book.upfile.idx %>" id="btRemoveFile">삭제</button>
 							</div>
 						<% } %> 
-						<input type="file" name="upfile" class="form-control-file">
+            <div class="mo-upfile-wrap">
+              <div class="mo-upfile">첨부파일</div>
+              <input type="file" name="upfile" class="form-control-file">
+            </div>
 					</td>
 				</tr>
 			</tbody>

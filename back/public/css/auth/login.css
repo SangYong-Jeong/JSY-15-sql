@@ -17,3 +17,8 @@
 
 .login-wrapper .valid {padding-top: .5em; color: #0059b0;}
 .login-wrapper .valid.error {color: #a70404;}
+
+@media screen and (max-width: 575px) {
+  .title-wrapper .desc-wrap {font-size: 1em;}
+  .login-wrapper table td.title {display: none;}
+}

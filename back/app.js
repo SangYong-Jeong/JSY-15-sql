@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path')
+const helmet = require('helmet')
 const passport = require('passport')
 const passportModule = require('./passport')
 
@@ -16,6 +17,9 @@ const langMW = require('./middlewares/lang-mw')
 /*************** server init **************/
 require('./modules/server-init')(app, process.env.PORT)
 
+
+/*************** helmet init **************/
+app.use(helmet({ contentSecurityPolicy: false }))
 
 /*************** static init **************/
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -69,5 +73,3 @@ const _500Router = require('./routes/error/500-router')
 
 app.use(_404Router)
 app.use(_500Router)
-
-/* 반응형 및 카카오 네이버 로그인 설정 다시하기 */

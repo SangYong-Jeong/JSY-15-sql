@@ -2,12 +2,15 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 /*************** server init **************/
 require('./modules/server-init')(app, process.env.PORT)
 
+/*************** helmet init **************/
+app.use(helmet({ contentSecurityPolicy: false }))
 
 /*************** middleware ***************/
 app.use(express.json())

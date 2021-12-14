@@ -13,7 +13,7 @@ const deleteUser = async (user) => {
 			if(r.affectedRows) {
 				sql = " UPDATE users_sns SET status = '0' WHERE fidx=? "
 				const [r2] = await pool.execute(sql, [idx])
-        allow = r2.affectedRows
+				allow = r2.affectedRows
 			}
 			else return { success: false }
 		}
@@ -22,7 +22,7 @@ const deleteUser = async (user) => {
 			if(success) {
 				sql = " UPDATE users SET status = '0' WHERE idx=? "
 				const [r2] = await pool.execute(sql, [idx])
-        allow = r2.affectedRows
+				allow = r2.affectedRows
 			}
 			else return { success: false }
 		}

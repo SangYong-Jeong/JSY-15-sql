@@ -34,7 +34,7 @@ const findBook = async idx => {
 const findBooks = async (startIdx, listCnt) => {
 	try {
 		let sql = `
-		SELECT B.*, F.savename AS cover, F2.savename AS icon 
+		SELECT B.*, F.savename AS cover, F2.savename AS icon  
 		FROM books B 
 		LEFT JOIN files F ON B.idx = F.fidx AND F.fieldname = 'C' AND F.status > '0'
 		LEFT JOIN files F2 ON B.idx = F2.fidx AND F2.fieldname = 'U' AND F2.status > '0'
@@ -50,14 +50,14 @@ const findBooks = async (startIdx, listCnt) => {
 }
 
 const findMyBook = async (idx, fidx) => {
-	try{
+	try {
 		let sql = " SELECT COUNT(idx) FROM books WHERE idx=? AND fidx=? "
 		const [[count]] = await pool.execute(sql, [idx, fidx])
-		return { success: count['COUNT(idx)'] ? true : false}
+		return { success: count['COUNT(idx)'] ? true : false }
 	}
-	catch(err){
+	catch(err) {
 		throw new Error(err)
 	}
-}
+} 
 
 module.exports = { findBookCount, findBook, findBooks, findMyBook }

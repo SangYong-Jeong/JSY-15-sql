@@ -1,6 +1,5 @@
 /*
 * fields : [['fieldname', 'value'],[],[]]
-
 */
 
 const { pool } = require('../../modules/mysql-init')
@@ -21,17 +20,17 @@ const updateFile = async (idx, fields) => {
 	}
 }
 
-const updateFileStatus = async (fidx, status=0) => {
+const updateFileStatus = async (fidx, status = 0) => {
 	try {
-		let sql = " UPDATE files SET status=? WHERE fidx=?  "
+		let sql = " UPDATE files SET status=? WHERE fidx=? "
 		const [rs] = await pool.execute(sql, [String(status), String(fidx)])
 		return rs.affectedRows > 0 
-			? { success: true, idx } 
-			: { success: false, idx, msg: 'Error' }
+			? { success: true, fidx } 
+			: { success: false, fidx, msg: 'Error' }
 	}
 	catch(err) {
 		throw new Error(err)
 	}
 }
 
-module.exports = { updateFileStatus, updateFile } 
+module.exports = { updateFile, updateFileStatus } 

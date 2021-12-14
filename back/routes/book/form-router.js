@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 const { relPath, alert } = require('../../modules/util')
+const { findBook } = require('../../models/book')
 const { NO_EXIST } = require('../../modules/lang-init')
 const { isUser, isGuest, isMyBook } = require('../../middlewares/auth-mw')
-const { findBook } = require('../../models/book')
 
 router.get('/', isUser, (req, res, next) => {
 	req.app.locals.PAGE = 'CREATE'

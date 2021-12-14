@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
-const {alert} = require('../../modules/util')
+const { error, alert } = require('../../modules/util')
 
 router.get('/', passport.authenticate('naver'))
 

@@ -13,7 +13,7 @@ router.post('/:idx', async (req, res, next) => {
 		else next(error(500, '데이터가 수정되지 않았습니다.'))
 	}
 	catch(err) {
-		next(error(err))
+		next(error(500, err))
 	}
 })
 
